@@ -31,9 +31,6 @@ data3 <- apply(data3, 2,FUN = function(x) recode(x, "1=0; 2=1"))
 data3 <- as.data.frame(data3)
 
 
-
-
-
 ################
 #explore the data
 ################
@@ -70,7 +67,20 @@ Fadiga~idade
 fit<-sem(model2,data3,ordered = c("V1","V2","V3","V4","V5","V6","V7","V8"))
 summary(fit, fit.measures = TRUE, standardized=TRUE)
 
-
+#Age capturing the fatigue effect
+model3='
+Fator=~NA*V1+V2+V3+V4+V5+V6+V7+V8
+Fator~~1*Fator
+Fator~idade
+V5~idade
+V6~idade
+V7~idade
+V8~idade
+'
+fit<-sem(model3,data3,ordered = c("V1","V2","V3","V4","V5","V6","V7","V8"))
+summary(fit, fit.measures = TRUE, standardized=TRUE)
+      
+               
 ##########
 #NOW HYPOTHESIZE A MODEL FOR A NEW TESTING SITUATION!
 #Suppose you have a dataset with 5 items measuring negative life events, and 5 items measuring happiness.
