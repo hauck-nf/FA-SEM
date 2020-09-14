@@ -10,6 +10,10 @@ library(car)
 #####################
 #Simulate data3
 #####################
+#5000 minions take an attention test comprising 8 tasks. 
+#Minions have ages from 6 to 10 years.
+#Each task requires that minions read a small text and soon after identify the correct stimulus among a set of different figures.
+
 model=
   'F1 =~ .80*V1+.70*V2+.60*V3+.50*V4+.40*V5+.30*V6+.20*V7+.10*V8
   F2 =~ .10*V5+.20*V6+.30*V7+.40*V8
