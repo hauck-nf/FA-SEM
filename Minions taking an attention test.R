@@ -87,9 +87,9 @@ summary(fit, fit.measures = TRUE, standardized=TRUE)
                
 ##########
 #NOW HYPOTHESIZE A MODEL FOR A NEW TESTING SITUATION!
-#Suppose you have a dataset with 5 items measuring negative life events, and 5 items measuring happiness.
+#Suppose the minions answered a questionnaire containing 5 items measuring negative life events, and 5 items measuring happiness.
 #Items are rated on a 5-point Likert scale
-#Draw a model diagram that explain item responses
+#Now draw a model diagram with a plausible explanation to the observed item responses
 
 
 
