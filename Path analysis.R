@@ -13,7 +13,7 @@ model1=
   Y~.5*Z
   Y~.5*T
 '
-data6<-simulateData(model = model1, model.type = "sem", sample.nobs = 500L)
+data6<-simulateData(model = model1, model.type = "sem", sample.nobs = 500L,standardized=TRUE)
 
 ########
 #does buying a videogame (X) make you happier (Y)?
@@ -28,6 +28,8 @@ model=
   'Z~X
   Y~Z
   Y~X
+  T~X
+  Y~T
   '
 fit<-sem(model, data6,estimator="ML",std.lv=TRUE)
 summary(fit,standardized=TRUE,fit.measures=TRUE)
@@ -40,7 +42,7 @@ semPaths(fit)
 #load an item dictionary containing variable names, theoretical factor,
 #semantic pole (negative = -1; positive = 1), and order of appearance 
 #according to the dataset
-setwd("")#enter the path directory where the item dictionary is located
+setwd("C:/Users/hauck/OneDrive/Google Drive/USF/Aulas/2020/AF&SEM/Analyses")#enter the path directory where the item dictionary is located
 item_dic_bfi<-read_excel("item_dic_bfi.xlsx")
 
 #score variables using the dictionary info and the psych package
@@ -61,9 +63,38 @@ scores<-as.data.frame(bfi_scores[["scores"]])
 bfi_scores[["alpha"]]
 bfi_scores[["G6"]]
 
+
 #add columns with scores to the bfi dataset
 bfi_total<-cbind(bfi,scores)
 
 #####
 #hypothesize, specify, and test a path model using lavaan!
 #####
+#step1: saturated model with 0 degrees of freedom
+model_path_bfi_saturated=
+  '
+  E ~ age + education
+  A ~ age + education
+  C ~ age + education
+  N ~ age + education
+  O ~ age + education
+  '
+fit<-sem(model_path_bfi_saturated, bfi_total,estimator="MLR")
+summary(fit,standardized=TRUE,fit.measures=TRUE)
+
+#step2: restricted model with >0 degrees of freedom
+model_path_bfi_restricted=
+  '
+  E ~ age 
+  A ~ age 
+  C ~ age 
+  N ~ age 
+  O ~ education
+  '
+fit<-sem(model_path_bfi_restricted, bfi_total,estimator="MLR")
+summary(fit,standardized=TRUE,fit.measures=TRUE,modindices=TRUE)
+
+
+
+
+
